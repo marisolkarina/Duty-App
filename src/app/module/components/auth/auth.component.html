@@ -1,0 +1,24 @@
+<div class="row mt-5">
+    <h3 class="text-center">Inicio de sesión</h3>
+    <form class="col-md-4" [formGroup]="consultaForm" (ngSubmit)="onSaveForm()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico </label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+
+            <div *ngIf="consultaForm.get('email').touched">
+                <div class="alert alert-danger mt-1" *ngIf="consultaForm.get('email').errors?.required">
+                    <div class="container-error-message">Correo electrónico es requerido</div>
+                </div>
+                <div class="alert alert-danger mt-1" *ngIf="consultaForm.get('email').errors?.pattern">
+                    <div class="container-error-message">Correo inválido</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div> -->
+        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+    </form>
+    
+</div>

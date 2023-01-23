@@ -1,0 +1,73 @@
+    
+<div>
+    <div class="row">
+        <h4 class="text-center mt-3">Añadir datos</h4>    
+        <form [formGroup]="createDuty" class="form-horizontal col-md-6 border p-3" (ngSubmit)="addDuty()">
+            <div class="form-group mb-3">
+                <label for="description" class="control-label">Descripción</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="description" 
+                    name="description" 
+                    [(ngModel)]="selectedDuty.description"
+                    placeholder="Agrega la descripción"
+                    formControlName="description"
+                >
+                <div >
+                    <div class="alert alert-danger mt-1" *ngIf="submitted && createDuty.invalid">
+                        <div class="container-error-message" >Descripción es requerida</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="commitmentDate" class="control-label mt-3 ">Fecha de compromiso</label>
+                <div class="">
+                    <input 
+                        type="date" 
+                        class="form-control" 
+                        id="commitmentDate" 
+                        name="commitmentDate" 
+                        [(ngModel)]="selectedDuty.commitmentDate"
+                        placeholder="Agrega la fecha de compromiso"
+                        formControlName="commitmentDate"
+                    >
+                </div>
+                
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary mt-3">Agregar</button>
+            </div>
+            
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            
+            <table class="table table-bordered mt-5">
+                <thead class="table-light">
+                    <tr>
+                        <th>Prioridad</th>
+                        <th>Descripción</th>
+                        <th>Fecha de compromiso</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let duty of dutyArray; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{duty.description}}</td>
+                        <td>{{duty.commitmentDate}}</td>
+                        <td>
+                            <a (click)="deleteDuty(i)" class="btn btn-danger">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-add-result></app-add-result>
+</div>
