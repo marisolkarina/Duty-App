@@ -1,6 +1,5 @@
-export class Duty {
-    id!: number;
-    description!: string;
-    commitmentDate!: Date;
+export interface Duty {
+    description: string;
+    commitmentDate: string;
 
 }

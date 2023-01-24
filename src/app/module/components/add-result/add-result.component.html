@@ -1,1 +1,28 @@
 <!-- <p>add-result works!</p> -->
+<div class="row">
+    <div class="col-md-8">    
+        <table class="table table-bordered mt-5">
+            <thead class="table-light">
+                <tr>
+                    <th>Prioridad</th>
+                    <th>Descripción</th>
+                    <th>Fecha de compromiso</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let duty of duties; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{duty.description}}</td>
+                    <td>{{duty.commitmentDate}}</td>
+                    <td>
+                        <a (click)="deleteDuty(duty)" class="btn btn-danger">
+                        
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

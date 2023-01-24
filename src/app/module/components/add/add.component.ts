@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Duty } from '../../../models/duty';
+import { DutyService } from '../../../services/duty.service';
 
 @Component({
   selector: 'app-add',
@@ -9,42 +10,62 @@ import { Duty } from '../../../models/duty';
 })
 export class AddComponent implements OnInit {
 
-  createDuty: FormGroup;
-  submitted = false;
+  formDuty: any;
+  // submitted = false;
 
-  dutyArray: Duty[] = [
+  // dutyArray: Duty[] = [
     
-  ];
+  // ];
 
-  selectedDuty: Duty = new Duty();
+  // selectedDuty: Duty = new Duty();
 
-  constructor(public fb: FormBuilder) {
-    this.createDuty = this.fb.group({
-      description: ['', Validators.required],
-      commitmentDate: ['']
-    })
+
+  constructor(
+    private fb: FormBuilder,
+    public dutyService: DutyService
+  ) {
+
   }
 
   ngOnInit(): void {
-
+    this.formDuty = this.fb.group({		
+			description: ['',Validators.required],
+      commitmentDate: ['']
+		});
   }
 
-  addDuty():void {
-    if(this.createDuty.valid){
-      this.submitted = true;
-      this.selectedDuty.id = this.dutyArray.length + 1;
-      this.dutyArray.push(this.selectedDuty);
-      this.selectedDuty = new Duty();
-      console.log("valid")
-    } else {
-      return;
+  addDuty(newDescription: HTMLInputElement, newCommitmentDate: HTMLInputElement) {
+
+  console.log(newDescription.value, newCommitmentDate.value)
+    
+    if(this.formDuty.valid) {
+      this.dutyService.addDuty({  
+        description: newDescription.value,
+        commitmentDate: newCommitmentDate.value
+      })
+      newDescription.value='',
+      newCommitmentDate.value=''
+      
+      console.log('valid')
     }
+    return false;
+
+
+    // if(this.createDuty.valid){
+    //   this.submitted = true;
+    //   this.selectedDuty.id = this.dutyArray.length + 1;
+    //   this.dutyArray.push(this.selectedDuty);
+    //   this.selectedDuty = new Duty();
+    //   console.log("valid")
+    // } else {
+    //   return;
+    // }
     
   }
 
-  deleteDuty(i:number):void {
-    this.dutyArray.splice(i, 1);
-  }
+  // deleteDuty(i:number):void {
+  //   this.dutyArray.splice(i, 1);
+  // }
 
 
 

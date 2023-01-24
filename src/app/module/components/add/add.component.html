@@ -2,7 +2,8 @@
 <div>
     <div class="row">
         <h4 class="text-center mt-3">Añadir datos</h4>    
-        <form [formGroup]="createDuty" class="form-horizontal col-md-6 border p-3" (ngSubmit)="addDuty()">
+        <!-- <form [formGroup]="createDuty" class="form-horizontal col-md-6 border p-3" (ngSubmit)="addDuty()"> -->
+        <form [formGroup]="formDuty" class="form-horizontal col-md-6 border p-3" (ngSubmit)="addDuty(newDescription, newCommitmentDate)">
             <div class="form-group mb-3">
                 <label for="description" class="control-label">Descripción</label>
                 <input 
@@ -10,12 +11,14 @@
                     class="form-control" 
                     id="description" 
                     name="description" 
-                    [(ngModel)]="selectedDuty.description"
+                    
                     placeholder="Agrega la descripción"
                     formControlName="description"
+
+                    #newDescription
                 >
-                <div >
-                    <div class="alert alert-danger mt-1" *ngIf="submitted && createDuty.invalid">
+                <div *ngIf="formDuty.get('description').touched">
+                    <div class="alert alert-danger mt-1" *ngIf="formDuty.get('description').errors?.required">
                         <div class="container-error-message" >Descripción es requerida</div>
                     </div>
                 </div>
@@ -28,9 +31,10 @@
                         class="form-control" 
                         id="commitmentDate" 
                         name="commitmentDate" 
-                        [(ngModel)]="selectedDuty.commitmentDate"
+                        
                         placeholder="Agrega la fecha de compromiso"
-                        formControlName="commitmentDate"
+
+                        #newCommitmentDate
                     >
                 </div>
                 
@@ -42,7 +46,7 @@
         </form>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-8">
             
             <table class="table table-bordered mt-5">
@@ -61,6 +65,7 @@
                         <td>{{duty.commitmentDate}}</td>
                         <td>
                             <a (click)="deleteDuty(i)" class="btn btn-danger">
+                            
                                 Eliminar
                             </a>
                         </td>
@@ -68,6 +73,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> -->
     <app-add-result></app-add-result>
 </div>
