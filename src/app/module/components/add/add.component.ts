@@ -11,6 +11,7 @@ import { DutyService } from '../../../services/duty.service';
 export class AddComponent implements OnInit {
 
   formDuty: any;
+
   // submitted = false;
 
   // dutyArray: Duty[] = [
@@ -35,20 +36,22 @@ export class AddComponent implements OnInit {
   }
 
   addDuty(newDescription: HTMLInputElement, newCommitmentDate: HTMLInputElement) {
-
-  console.log(newDescription.value, newCommitmentDate.value)
-    
-    if(this.formDuty.valid) {
+  
+    if(this.formDuty.valid){
       this.dutyService.addDuty({  
         description: newDescription.value,
         commitmentDate: newCommitmentDate.value
       })
-      newDescription.value='',
-      newCommitmentDate.value=''
       
-      console.log('valid')
+      this.formDuty.reset()
+      return false;
+    } else {
+      return;
     }
-    return false;
+    
+      
+ 
+    
 
 
     // if(this.createDuty.valid){
@@ -62,6 +65,7 @@ export class AddComponent implements OnInit {
     // }
     
   }
+
 
   // deleteDuty(i:number):void {
   //   this.dutyArray.splice(i, 1);
