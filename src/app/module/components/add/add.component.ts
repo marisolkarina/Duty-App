@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Duty } from '../../../models/duty';
 import { DutyService } from '../../../services/duty.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-add',
@@ -11,15 +12,14 @@ import { DutyService } from '../../../services/duty.service';
 export class AddComponent implements OnInit {
 
   formDuty: any;
-
-  // submitted = false;
-
-  // dutyArray: Duty[] = [
-    
-  // ];
-
-  // selectedDuty: Duty = new Duty();
-
+ 
+  // formDuty = new FormGroup (
+  //   {
+  //     description: new FormControl(''),
+  //     commitmentDate: new FormControl('')
+  //   }
+  // )
+  
 
   constructor(
     private fb: FormBuilder,
@@ -35,43 +35,32 @@ export class AddComponent implements OnInit {
 		});
   }
 
-  addDuty(newDescription: HTMLInputElement, newCommitmentDate: HTMLInputElement) {
+  // addDuty(newDescription: HTMLInputElement, newCommitmentDate: HTMLInputElement) {
   
-    if(this.formDuty.valid){
-      this.dutyService.addDuty({  
-        description: newDescription.value,
-        commitmentDate: newCommitmentDate.value
-      })
+  //   if(this.formDuty.valid){
+  //     this.dutyService.addDuty({  
+  //       description: newDescription.value,
+  //       commitmentDate: newCommitmentDate.value
+  //     })
       
+  //     this.formDuty.reset()
+  //     return false;
+  //   } else {
+  //     return;
+  //   }
+ 
+  // }
+
+  addDuty() {
+    // console.log(this.formDuty.value)
+    if (this.formDuty.valid){
+      this.dutyService.addDuty(this.formDuty.value)
       this.formDuty.reset()
       return false;
     } else {
+      console.log('invalid')
+      
       return;
     }
-    
-      
- 
-    
-
-
-    // if(this.createDuty.valid){
-    //   this.submitted = true;
-    //   this.selectedDuty.id = this.dutyArray.length + 1;
-    //   this.dutyArray.push(this.selectedDuty);
-    //   this.selectedDuty = new Duty();
-    //   console.log("valid")
-    // } else {
-    //   return;
-    // }
-    
   }
-
-
-  // deleteDuty(i:number):void {
-  //   this.dutyArray.splice(i, 1);
-  // }
-
-
-
-
 }

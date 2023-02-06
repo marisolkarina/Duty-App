@@ -1,6 +1,6 @@
 <div class="row mt-5">
-    <h3 class="text-center">Inicio de sesión</h3>
-    <form class="col-md-4" [formGroup]="consultaForm" (ngSubmit)="onSaveForm()">
+    <h3 class="text-center">Registro de nuevo usuario</h3>
+    <form class="col-md-4" [formGroup]="signupForm" (ngSubmit)="onSaveForm()">
         <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico </label>
             <input 
@@ -12,11 +12,11 @@
                 
             >
 
-            <div *ngIf="consultaForm.get('email').touched">
-                <div class="alert alert-danger mt-1" *ngIf="consultaForm.get('email').errors?.required">
+            <div *ngIf="signupForm.get('email').touched">
+                <div class="alert alert-danger mt-1" *ngIf="signupForm.get('email').errors?.required">
                     <div class="container-error-message">Correo electrónico es requerido</div>
                 </div>
-                <div class="alert alert-danger mt-1" *ngIf="consultaForm.get('email').errors?.pattern">
+                <div class="alert alert-danger mt-1" *ngIf="signupForm.get('email').errors?.pattern">
                     <div class="container-error-message">Correo inválido</div>
                 </div>
             </div>
@@ -30,15 +30,15 @@
                 formControlName="password"
             >
 
-            <div *ngIf="consultaForm.get('password').touched">
-                <div class="alert alert-danger mt-1" *ngIf="consultaForm.get('password').errors?.required">
+            <div *ngIf="signupForm.get('password').touched">
+                <div class="alert alert-danger mt-1" *ngIf="signupForm.get('password').errors?.required">
                     <div class="container-error-message">Contraseña es requerida</div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
     </form>
 
-    <a [routerLink]="['/module/signup']" routerLinkActive="active" class="alc text-center">Sign up for an <strong>Account</strong></a>
+    <a [routerLink]="['/module/auth']" routerLinkActive="active" class="alc text-center">Go back</a>
     
 </div>
